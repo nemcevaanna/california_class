@@ -1,10 +1,16 @@
+import os
+
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
+import keras
+
 from fastapi import FastAPI
 import tensorflow as tf
 from tensorflow import keras
 import pickle
 import numpy as np
 from pydantic import BaseModel
-import os
+
 
 app = FastAPI()
 
@@ -46,4 +52,3 @@ async def predict(input_data: InputData):
     prediction = model.predict(X_scaled)
     
     return {"prediction": float(prediction[0][0])}
-
